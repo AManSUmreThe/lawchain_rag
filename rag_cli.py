@@ -29,14 +29,13 @@ def main():
             chunks = generate_chunks(size=args.chunk_size,ovelap=args.chunk_overlap)
                 
             # Show example of a chunk
-            # for i in range(5):
-            for chunk in chunks:
+            for chunk in chunks[:2]:
                 print(f"\nExample chunk:")
-                print(f"Content: {chunk.page_content[:200]}...")
+                print(f"Content: {chunk.page_content[:100]}...")
                 print(f"Metadata: {chunk.metadata}")
         case "pdf":
             docs = get_all_pdfs(args.path)
-            for doc in docs:
+            for doc in docs[:5]:
                 print(doc)
         case _:
             parser.print_help()

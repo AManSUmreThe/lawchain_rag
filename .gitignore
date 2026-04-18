@@ -13,3 +13,5 @@ wheels/
 .venv
 
 #dataset
+## Vector Database
+data/vector_db

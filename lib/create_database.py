@@ -8,8 +8,7 @@ from sklearn.metrics.pairwise import cosine_similarity
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 
 from utils.search_utils import (
-    ROOT,
-    PDF_PATH,
+    HF_TOKEN,
     get_all_pdfs)
 
 class EmbeddingManager:
@@ -30,8 +29,8 @@ class EmbeddingManager:
         """Load the SentenceTransformer model"""
         try:
             print(f"Loading embedding model: {self.model_name}")
-            self.model = SentenceTransformer(self.model_name)
-            print(f"Model loaded successfully. Embedding dimension: {self.model.get_sentence_embedding_dimension()}")
+            self.model = SentenceTransformer(self.model_name,token=HF_TOKEN)
+            print(f"Model loaded successfully. Embedding dimension: {self.model.get_embedding_dimension()}")
         except Exception as e:
             print(f"Error loading model {self.model_name}: {e}")
             raise
@@ -64,12 +63,14 @@ def chunk_documents(documents,chunk_size=1000,chunk_overlap=200):
     )
     chunks = text_splitter.split_documents(documents)
     print(f"Chunking {len(documents)} documents into {len(chunks)} chunks")    
-    
+
     return chunks
 
 def generate_chunks(size,ovelap,path=None):
     documents = get_all_pdfs()
     chunks = chunk_documents(documents,size,ovelap)
+
+    return chunks
 
 def generate_embeddings():
     embedder = EmbeddingManager()
