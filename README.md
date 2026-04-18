@@ -1,1 +1,1 @@
-# lawchain_rag
+# LawChain RAG
