@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 
 import argparse
-from lib.create_database import generate_chunks
+from lib.create_database import (
+    generate_chunks, 
+    generate_embeddings)
 from utils.search_utils import (
-    ROOT,
     PDF_PATH,
     get_all_pdfs)
 
@@ -21,10 +22,14 @@ def main():
     chunk_docs_parser.add_argument("--chunk_size",default=1000, type=str, help="Maximum size of chunks")
     chunk_docs_parser.add_argument("--chunk_overlap",default=200, type=str, help="Chunk overlap")
 
+    embed_parser = subparsers.add_parser("embed",help="Generate embeddings using BERT")
+
 
     args = parser.parse_args()
 
     match args.command:
+        case "embed":
+            embeddings = generate_embeddings()
         case "chunk":
             chunks = generate_chunks(size=args.chunk_size,ovelap=args.chunk_overlap)
                 

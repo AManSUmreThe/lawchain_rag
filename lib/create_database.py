@@ -74,3 +74,10 @@ def generate_chunks(size,ovelap,path=None):
 
 def generate_embeddings():
     embedder = EmbeddingManager()
+    documents = get_all_pdfs()
+    chunks = chunk_documents(documents)
+    embeddings = []
+    for chunk in chunks[:10]:
+        embeddings.append(embedder.generate_embeddings(chunk.page_content))
+    
+    return embeddings
