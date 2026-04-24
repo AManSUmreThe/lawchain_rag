@@ -41,7 +41,7 @@ Legal PDF RAG pipeline built with LangChain, SentenceTransformers embeddings, Ch
 ## Smoke Test
 
 Run:
-- `python scripts/smoke_test.py`
+- `python -m scripts.smoke_test`
 
 This validates:
 - ingest creates vectors
